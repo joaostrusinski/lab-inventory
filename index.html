@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-
     <h1>Gerência de Equipamentos Aprovisionados</h1>
 
     <div class="controles">
@@ -20,21 +19,16 @@
         <form class="form-cadastro">
             <input type="text" placeholder="OLT" required>
             <input type="text" placeholder="GPON" required>
-            
             <input type="number" placeholder="SLOT" class="numeric-only">
             <input type="number" placeholder="PORTA" class="numeric-only">
             <input type="number" placeholder="ID" class="numeric-only">
             <input type="number" placeholder="CVLAN" class="numeric-only">
-            <input type="number" placeholder="VLAN REDE" class="numeric-only">
-            <input type="number" placeholder="VLAN VOIP" class="numeric-only">
+            <input type="number" placeholder="VLAN REDE" class="numeric-only"> <input type="number" placeholder="VLAN VOIP" class="numeric-only">
             <input type="number" placeholder="VLAN VIDEO" class="numeric-only">
-            
             <input type="text" placeholder="OBSERVAÇÃO">
-
             <button type="submit">Cadastrar Equipamento</button>
         </form>
     </div>
-
 
     <table>
         <thead>
@@ -45,10 +39,10 @@
                 <th>ID</th>
                 <th>GPON</th>
                 <th>CVLAN</th>
-                <th>VLAN REDE</th>
-                <th>VLAN VOIP</th>
+                <th>VLAN REDE</th> <th>VLAN VOIP</th>
                 <th>VLAN VIDEO</th>
                 <th>OBSERVAÇÃO</th>
+                <th>AÇÕES</th>
             </tr>
         </thead>
         <tbody>
@@ -63,6 +57,7 @@
                 <td>1113</td>
                 <td>3930</td>
                 <td>Equipamento associado e configurado.</td>
+                <td><button class="btn-apagar">Apagar</button></td>
             </tr>
             <tr>
                 <td>CTA_LAB_GPON_VLAN_116</td>
@@ -75,35 +70,11 @@
                 <td></td>
                 <td></td>
                 <td>Equipamento associado.</td>
+                <td><button class="btn-apagar">Apagar</button></td>
             </tr>
-            <tr>
-                <td>CTA_LAB_GPON_VLAN_116</td>
-                <td>6</td>
-                <td>1</td>
-                <td>2</td>
-                <td>TLCM0002B27A</td>
-                <td>1101</td>
-                <td>216</td>
-                <td></td>
-                <td>3930</td>
-                <td>Equipamento associado e configurado.</td>
-            </tr>
-            <tr>
-                <td>CTA_LAB_GPON_VLAN_116</td>
-                <td>2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>Não localizado nenhum equipamento conectado nos ID das portas.</td>
-            </tr>
-        </tbody>
+            </tbody>
     </table>
 
     <script src="scripts.js"></script>
-
 </body>
 </html>

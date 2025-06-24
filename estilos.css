@@ -105,3 +105,13 @@ button:hover {
 #btn-filtrar:hover {
     background-color: #0069d9;
 }
+
+/* Adicionar ao final de estilos.css */
+
+.btn-apagar {
+    background-color: #dc3545; /* Vermelho */
+}
+
+.btn-apagar:hover {
+    background-color: #c82333; /* Vermelho mais escuro */
+}

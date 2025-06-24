@@ -1,62 +1,62 @@
-// scripts.js (versão 3 - com validação numérica)
+// scripts.js (versão 4 - com funcionalidade de apagar)
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- SEÇÃO DE FILTRO ---
+    // --- SEÇÕES DE ELEMENTOS GLOBAIS ---
     const filterInput = document.getElementById('filtro');
-    const filterButton = document.getElementById('btn-filtrar');
-
-    function filtrarTabela() {
-        const tableRows = document.querySelectorAll('table tbody tr');
-        const termoBusca = filterInput.value.toLowerCase();
-
-        tableRows.forEach(function(linha) {
-            const textoLinha = linha.textContent.toLowerCase();
-            if (textoLinha.includes(termoBusca)) {
-                linha.style.display = '';
-            } else {
-                linha.style.display = 'none';
-            }
-        });
-    }
-
-    filterButton.addEventListener('click', filtrarTabela);
-    filterInput.addEventListener('keyup', filtrarTabela);
-
-
-    // --- SEÇÃO DE CADASTRO ---
     const form = document.querySelector('.form-cadastro');
     const tableBody = document.querySelector('table tbody');
 
+    // --- SEÇÃO DE FILTRO ---
+    function filtrarTabela() {
+        const tableRows = document.querySelectorAll('table tbody tr');
+        const termoBusca = filterInput.value.toLowerCase();
+        tableRows.forEach(linha => {
+            const textoLinha = linha.textContent.toLowerCase();
+            linha.style.display = textoLinha.includes(termoBusca) ? '' : 'none';
+        });
+    }
+    filterInput.addEventListener('keyup', filtrarTabela);
+
+    // --- SEÇÃO DE CADASTRO ---
     form.addEventListener('submit', function(evento) {
         evento.preventDefault();
         const inputs = form.querySelectorAll('input');
         const novaLinha = document.createElement('tr');
-
-        inputs.forEach(function(input) {
+        
+        inputs.forEach(input => {
             const novaCelula = document.createElement('td');
             novaCelula.textContent = input.value;
             novaLinha.appendChild(novaCelula);
         });
 
+        // Adiciona a célula com o botão de apagar na nova linha
+        const celulaAcoes = document.createElement('td');
+        celulaAcoes.innerHTML = '<button class="btn-apagar">Apagar</button>';
+        novaLinha.appendChild(celulaAcoes);
+        
         tableBody.appendChild(novaLinha);
         form.reset();
     });
 
+    // --- SEÇÃO PARA APAGAR LINHA (Delegação de Eventos) ---
+    // Adicionamos um único "ouvinte" ao corpo da tabela.
+    // Ele vai monitorar todos os cliques que acontecerem dentro dele.
+    tableBody.addEventListener('click', function(evento) {
+        // Verificamos se o alvo do clique (evento.target) foi um botão com a classe 'btn-apagar'
+        if (evento.target.classList.contains('btn-apagar')) {
+            // Se foi, encontramos a linha (tr) mais próxima do botão que foi clicado
+            const linhaParaApagar = evento.target.closest('tr');
+            // E removemos essa linha da tabela
+            linhaParaApagar.remove();
+        }
+    });
 
-    // --- NOVA SEÇÃO DE VALIDAÇÃO NUMÉRICA ---
-    // Seleciona todos os inputs que marcamos com a classe 'numeric-only'
+    // --- SEÇÃO DE VALIDAÇÃO NUMÉRICA ---
     const numericInputs = document.querySelectorAll('.numeric-only');
-
-    // Para cada um desses inputs, adiciona um "ouvinte"
-    numericInputs.forEach(function(input) {
-        // O evento 'input' é disparado toda vez que o valor do campo muda (digitação, colar, etc.)
+    numericInputs.forEach(input => {
         input.addEventListener('input', function(evento) {
-            // Pega o valor atual do campo e usa uma expressão regular para remover
-            // qualquer coisa que NÃO seja um número (\D).
-            // O 'g' no final garante que ele remova todas as ocorrências, não apenas a primeira.
             evento.target.value = evento.target.value.replace(/\D/g, '');
         });
     });
-
 });
