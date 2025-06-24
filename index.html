@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventário de Equipamentos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <h1>Gerência de Equipamentos Aprovisionados</h1>
+
+    <div class="controles">
+        <input type="text" id="filtro" placeholder="Filtrar por OLT, GPON, etc...">
+        <button id="btn-filtrar">Filtrar</button>
+    </div>
+
+    <div class="form-container">
+        <h2>Cadastrar Novo Equipamento</h2>
+        <form class="form-cadastro">
+            <input type="text" placeholder="OLT" required>
+            <input type="text" placeholder="GPON" required>
+            
+            <input type="number" placeholder="SLOT" class="numeric-only">
+            <input type="number" placeholder="PORTA" class="numeric-only">
+            <input type="number" placeholder="ID" class="numeric-only">
+            <input type="number" placeholder="CVLAN" class="numeric-only">
+            <input type="number" placeholder="VLAN REDE" class="numeric-only">
+            <input type="number" placeholder="VLAN VOIP" class="numeric-only">
+            <input type="number" placeholder="VLAN VIDEO" class="numeric-only">
+            
+            <input type="text" placeholder="OBSERVAÇÃO">
+
+            <button type="submit">Cadastrar Equipamento</button>
+        </form>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>OLT</th>
+                <th>SLOT</th>
+                <th>PORTA</th>
+                <th>ID</th>
+                <th>GPON</th>
+                <th>CVLAN</th>
+                <th>VLAN REDE</th>
+                <th>VLAN VOIP</th>
+                <th>VLAN VIDEO</th>
+                <th>OBSERVAÇÃO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CTA_LAB_GPON_VLAN_116</td>
+                <td>1</td>
+                <td>4</td>
+                <td>13</td>
+                <td>TLCM00005FA0</td>
+                <td>1413</td>
+                <td>116</td>
+                <td>1113</td>
+                <td>3930</td>
+                <td>Equipamento associado e configurado.</td>
+            </tr>
+            <tr>
+                <td>CTA_LAB_GPON_VLAN_116</td>
+                <td>1</td>
+                <td>6</td>
+                <td>5</td>
+                <td>ASKY001294EF</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Equipamento associado.</td>
+            </tr>
+            <tr>
+                <td>CTA_LAB_GPON_VLAN_116</td>
+                <td>6</td>
+                <td>1</td>
+                <td>2</td>
+                <td>TLCM0002B27A</td>
+                <td>1101</td>
+                <td>216</td>
+                <td></td>
+                <td>3930</td>
+                <td>Equipamento associado e configurado.</td>
+            </tr>
+            <tr>
+                <td>CTA_LAB_GPON_VLAN_116</td>
+                <td>2</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Não localizado nenhum equipamento conectado nos ID das portas.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="scripts.js"></script>
+
+</body>
+</html>
