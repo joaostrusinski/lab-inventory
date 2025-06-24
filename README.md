@@ -58,9 +58,9 @@ A fase atual compreende apenas a interface do usuário. Os próximos passos para
 
 ## 👤 Autor
 
--   **[Seu Nome Completo]**
--   **GitHub:** `[link para o seu perfil do GitHub]`
--   **LinkedIn:** `[link para o seu perfil do LinkedIn]`
+-   **João Pedro Strusinski Chagas**
+-   **GitHub:** `https://github.com/joaostrusinski`
+-   **LinkedIn:** `https://www.linkedin.com/in/joao-pedro-strusinski-chagas/`
 
 ## 📄 Licença
 
