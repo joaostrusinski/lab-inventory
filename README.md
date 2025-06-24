@@ -5,7 +5,7 @@
 
 Um sistema web front-end para gerenciar e visualizar os equipamentos de um laboratório de testes de rede, substituindo o controle manual por planilhas.
 
-![Screenshot do Projeto](https://imgur.com/a/dJ9WIJk.png)
+![Screenshot do Projeto](https://imgur.com/a/dJ9WIJk)
 *Substitua o link acima pelo link de uma imagem do seu projeto. Você pode subir a imagem no próprio GitHub ou usar um serviço como o Imgur.*
 
 ## 📋 Sobre o Projeto
