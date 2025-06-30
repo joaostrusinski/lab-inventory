@@ -1,0 +1,117 @@
+/* estilos.css (versão final completa) */
+
+/* Estilo para o corpo da página */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Estilo para o título principal */
+h1 {
+    color: #004494; /* Um tom de azul */
+}
+
+/* Estilo geral da tabela */
+table {
+    width: 100%; /* A tabela ocupa toda a largura disponível */
+    border-collapse: collapse; /* As bordas das células se juntam */
+    margin-top: 20px; /* Espaço acima da tabela */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
+}
+
+/* Estilo para todas as células (cabeçalho e dados) */
+th, td {
+    border: 1px solid #ddd; /* Borda cinza claro */
+    padding: 12px; /* Espaçamento interno */
+    text-align: left; /* Alinhamento do texto à esquerda */
+}
+
+/* Estilo específico para as células do cabeçalho */
+th {
+    background-color: #0056b3; /* Fundo azul mais forte */
+    color: white; /* Texto branco */
+    font-size: 14px;
+}
+
+/* Estilo para as linhas pares da tabela (efeito zebrado) */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fundo cinza bem claro */
+}
+
+/* Efeito ao passar o mouse sobre uma linha */
+tr:hover {
+    background-color: #e9ecef;
+}
+
+/* --- Estilos para os Controles e Formulário --- */
+
+.controles {
+    margin-bottom: 20px;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.form-container h2 {
+    margin-top: 0;
+    color: #004494;
+    border-bottom: 2px solid #f2f2f2;
+    padding-bottom: 10px;
+}
+
+.form-cadastro {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem para la próxima linha */
+    gap: 10px; /* Espaço entre os campos */
+}
+
+/* Estilo para os campos de texto E NÚMERO */
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1 1 150px; /* Faz com que os campos cresçam e encolham de forma flexível */
+}
+
+/* Estilo para os botões */
+button {
+    padding: 10px 15px;
+    background-color: #28a745; /* Cor verde para ações positivas */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* Muda o cursor para uma "mãozinha" */
+    font-size: 14px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #218838; /* Cor um pouco mais escura ao passar o mouse */
+}
+
+#btn-filtrar {
+    background-color: #007bff; /* Cor azul para o botão de filtro */
+}
+
+#btn-filtrar:hover {
+    background-color: #0069d9;
+}
+
+/* Adicionar ao final de estilos.css */
+
+.btn-apagar {
+    background-color: #dc3545; /* Vermelho */
+}
+
+.btn-apagar:hover {
+    background-color: #c82333; /* Vermelho mais escuro */
+}
