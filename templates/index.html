@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventário de Equipamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerência de Equipamentos Aprovisionados</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="controles">
+            <input type="text" id="filtro" placeholder="Filtrar por OLT, GPON, etc...">
+        </div>
+        
+        <div class="form-container">
+            <h2>Cadastrar Novo Equipamento</h2>
+            <form class="form-cadastro" action="{{ url_for('create') }}" method="post">
+                <input type="text" placeholder="OLT" name="olt" required>
+                <input type="text" placeholder="GPON" name="gpon" required>
+                <input type="number" placeholder="SLOT" name="slot" class="numeric-only">
+                <input type="number" placeholder="PORTA" name="porta" class="numeric-only">
+                <input type="number" placeholder="ID" name="id_onu" class="numeric-only">
+                <input type="number" placeholder="CVLAN" name="cvlan" class="numeric-only">
+                <input type="number" placeholder="VLAN REDE" name="vlan_rede" class="numeric-only">
+                <input type="number" placeholder="VLAN VOIP" name="vlan_voip" class="numeric-only">
+                <input type="number" placeholder="VLAN VIDEO" name="vlan_video" class="numeric-only">
+                <select name="status">
+                    <option value="Disponível">Disponível</option>
+                    <option value="Em Uso">Em Uso</option>
+                    <option value="Em Manutenção">Em Manutenção</option>
+                </select>
+                <input type="text" placeholder="OBSERVAÇÃO" name="observacao" class="input-full-width">
+                <button type="submit">Cadastrar Equipamento</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>OLT</th>
+                    <th>GPON</th>
+                    <th>SLOT</th>
+                    <th>PORTA</th>
+                    <th>ID</th>
+                    <th>CVLAN</th>
+                    <th>VLAN REDE</th>
+                    <th>VLAN VOIP</th>
+                    <th>VLAN VIDEO</th>
+                    <th>STATUS</th>
+                    <th>OBSERVAÇÃO</th>
+                    <th>DATA CADASTRO</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for equipamento in equipamentos %}
+                <tr class="{% if equipamento['status'] == 'Disponível' %}status-disponivel{% elif equipamento['status'] == 'Em Uso' %}status-em-uso{% elif equipamento['status'] == 'Em Manutenção' %}status-em-manutencao{% endif %}">
+                    <td>{{ equipamento['olt'] }}</td>
+                    <td>{{ equipamento['gpon'] }}</td>
+                    <td>{{ equipamento['slot'] or '' }}</td>
+                    <td>{{ equipamento['porta'] or '' }}</td>
+                    <td>{{ equipamento['id_onu'] or '' }}</td>
+                    <td>{{ equipamento['cvlan'] or '' }}</td>
+                    <td>{{ equipamento['vlan_rede'] or '' }}</td>
+                    <td>{{ equipamento['vlan_voip'] or '' }}</td>
+                    <td>{{ equipamento['vlan_video'] or '' }}</td>
+                    <td>{{ equipamento['status'] }}</td>
+                    <td>{{ equipamento['observacao'] or '' }}</td>
+                    <td>{{ equipamento['data_criacao'] | datetimeformat }}</td>
+                    <td>
+                        <a href="{{ url_for('update', id=equipamento['id']) }}" class="btn-editar">Editar</a>
+                        <form action="{{ url_for('delete') }}" method="post" class="form-apagar" style="display:inline;">
+                            <input type="hidden" name="id" value="{{ equipamento['id'] }}">
+                            <button type="submit" class="btn-apagar">Apagar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

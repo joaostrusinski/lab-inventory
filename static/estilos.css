@@ -1,0 +1,174 @@
+/* estilos.css (versão final com layout compacto e todos os estilos) */
+
+/* Define uma fonte base um pouco menor */
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 20px 0; /* Padding vertical */
+}
+
+/* Contêiner principal para limitar a largura e centralizar */
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    color: #004494;
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #0056b3;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.form-cadastro, .form-container form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-full-width {
+    grid-column: 1 / -1;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* REGRA CORRIGIDA: Aplica-se apenas aos botões de submissão principais */
+.form-container button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    grid-column: 1 / -1;
+    justify-self: end;
+    width: auto;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+#btn-filtrar {
+    background-color: #007bff;
+    color: white;
+}
+
+#btn-filtrar:hover {
+    background-color: #0069d9;
+}
+
+/* REGRA DO BOTÃO EDITAR CORRIGIDA */
+.btn-editar {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold; /* Garantindo o negrito */
+}
+
+.btn-editar:hover {
+    background-color: #5a6268;
+}
+
+/* REGRA DO BOTÃO APAGAR CORRIGIDA */
+.btn-apagar {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+}
+
+.btn-apagar:hover {
+    background-color: #c82333;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.status-disponivel {
+    background-color: #d4edda !important;
+}
+.status-em-uso {
+    background-color: #fff3cd !important;
+}
+.status-em-manutencao {
+    background-color: #f8d7da !important;
+}

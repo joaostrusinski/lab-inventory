@@ -1,0 +1,9 @@
+# Ambiente Virtual do Python
+venv/
+
+# Arquivos de Cache do Python
+__pycache__/
+*.pyc
+
+# Banco de Dados
+database.db
