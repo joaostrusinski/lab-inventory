@@ -1,4 +1,4 @@
-# app.py (versão simplificada)
+# app.py (versão reestruturada)
 
 import sqlite3
 import datetime
@@ -9,6 +9,7 @@ app.config['SECRET_KEY'] = 'sua-chave-secreta-muito-dificil'
 
 @app.template_filter('datetimeformat')
 def format_datetime(value, format='%d/%m/%Y %H:%M'):
+    """Formata uma string de data UTC para o formato brasileiro (UTC-3)."""
     if value is None:
         return ""
     utc_dt = datetime.datetime.strptime(value, '%Y-%m-%d %H:%M:%S')
@@ -20,38 +21,46 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+# A rota home agora é mais simples, apenas lê os dados da tabela equipamentos
 @app.route('/')
 def home():
     conn = get_db_connection()
     equipamentos = conn.execute('SELECT * FROM equipamentos ORDER BY id DESC;').fetchall()
     conn.close()
-    # Não passamos mais a lista de cenários
     return render_template('index.html', equipamentos=equipamentos)
 
+# Rota CREATE atualizada para os novos campos
 @app.route('/create', methods=['POST'])
 def create():
-    olt = request.form.get('olt')
-    gpon = request.form.get('gpon')
+    projeto = request.form.get('projeto')
+    usuario = request.form.get('usuario')
+    olt_hostname = request.form.get('olt_hostname')
+    olt_ip = request.form.get('olt_ip')
     slot = request.form.get('slot')
     porta = request.form.get('porta')
-    id_onu = request.form.get('id_onu')
+    ont_id = request.form.get('ont_id')
+    serial_gpon = request.form.get('serial_gpon')
+    tipo_cliente = request.form.get('tipo_cliente')
+    tipo_servico = request.form.get('tipo_servico')
+    svlan = request.form.get('svlan')
     cvlan = request.form.get('cvlan')
-    vlan_rede = request.form.get('vlan_rede')
-    vlan_voip = request.form.get('vlan_voip')
-    vlan_video = request.form.get('vlan_video')
-    observacao = request.form.get('observacao')
     status = request.form.get('status')
+    observacao = request.form.get('observacao')
 
     conn = get_db_connection()
-    # O comando INSERT agora é mais simples
-    conn.execute('INSERT INTO equipamentos (olt, gpon, slot, porta, id_onu, cvlan, vlan_rede, vlan_voip, vlan_video, observacao, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                 (olt, gpon, slot, porta, id_onu, cvlan, vlan_rede, vlan_voip, vlan_video, observacao, status))
+    conn.execute("""
+        INSERT INTO equipamentos 
+        (projeto, usuario, olt_hostname, olt_ip, slot, porta, ont_id, serial_gpon, tipo_cliente, tipo_servico, svlan, cvlan, status, observacao) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (projeto, usuario, olt_hostname, olt_ip, slot, porta, ont_id, serial_gpon, tipo_cliente, tipo_servico, svlan, cvlan, status, observacao))
     conn.commit()
     conn.close()
     
     flash('Equipamento cadastrado com sucesso!', 'success')
     return redirect(url_for('home'))
 
+# A rota DELETE continua a mesma
 @app.route('/delete', methods=['POST'])
 def delete():
     id_para_apagar = request.form.get('id')
@@ -62,32 +71,40 @@ def delete():
     flash('Equipamento apagado com sucesso!', 'danger')
     return redirect(url_for('home'))
 
+# A rota UPDATE (para mostrar a página de edição) continua a mesma
 @app.route('/update/<int:id>')
 def update(id):
     conn = get_db_connection()
     equipamento = conn.execute('SELECT * FROM equipamentos WHERE id = ?', (id,)).fetchone()
     conn.close()
-    # Não passamos mais a lista de cenários
     return render_template('update.html', equipamento=equipamento)
 
+# Rota PROCESS_UPDATE atualizada para os novos campos
 @app.route('/process_update/<int:id>', methods=['POST'])
 def process_update(id):
-    olt = request.form.get('olt')
-    gpon = request.form.get('gpon')
+    projeto = request.form.get('projeto')
+    usuario = request.form.get('usuario')
+    olt_hostname = request.form.get('olt_hostname')
+    olt_ip = request.form.get('olt_ip')
     slot = request.form.get('slot')
     porta = request.form.get('porta')
-    id_onu = request.form.get('id_onu')
+    ont_id = request.form.get('ont_id')
+    serial_gpon = request.form.get('serial_gpon')
+    tipo_cliente = request.form.get('tipo_cliente')
+    tipo_servico = request.form.get('tipo_servico')
+    svlan = request.form.get('svlan')
     cvlan = request.form.get('cvlan')
-    vlan_rede = request.form.get('vlan_rede')
-    vlan_voip = request.form.get('vlan_voip')
-    vlan_video = request.form.get('vlan_video')
-    observacao = request.form.get('observacao')
     status = request.form.get('status')
+    observacao = request.form.get('observacao')
 
     conn = get_db_connection()
-    # O comando UPDATE agora é mais simples
-    conn.execute('UPDATE equipamentos SET olt = ?, gpon = ?, slot = ?, porta = ?, id_onu = ?, cvlan = ?, vlan_rede = ?, vlan_voip = ?, vlan_video = ?, observacao = ?, status = ? WHERE id = ?',
-                (olt, gpon, slot, porta, id_onu, cvlan, vlan_rede, vlan_voip, vlan_video, observacao, status, id))
+    conn.execute("""
+        UPDATE equipamentos SET 
+        projeto = ?, usuario = ?, olt_hostname = ?, olt_ip = ?, slot = ?, porta = ?, ont_id = ?, 
+        serial_gpon = ?, tipo_cliente = ?, tipo_servico = ?, svlan = ?, cvlan = ?, status = ?, observacao = ?
+        WHERE id = ?
+        """,
+        (projeto, usuario, olt_hostname, olt_ip, slot, porta, ont_id, serial_gpon, tipo_cliente, tipo_servico, svlan, cvlan, status, observacao, id))
     conn.commit()
     conn.close()
 

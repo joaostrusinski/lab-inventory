@@ -12,23 +12,40 @@
         
         <div class="form-container">
             <form action="{{ url_for('process_update', id=equipamento['id']) }}" method="post">
-                <input type="text" placeholder="OLT" name="olt" required value="{{ equipamento['olt'] }}">
-                <input type="text" placeholder="GPON" name="gpon" required value="{{ equipamento['gpon'] }}">
-                <input type="number" placeholder="SLOT" name="slot" class="numeric-only" value="{{ equipamento['slot'] or '' }}">
-                <input type="number" placeholder="PORTA" name="porta" class="numeric-only" value="{{ equipamento['porta'] or '' }}">
-                <input type="number" placeholder="ID" name="id_onu" class="numeric-only" value="{{ equipamento['id_onu'] or '' }}">
+                <!-- Formulário atualizado com todos os novos campos -->
+                <input type="text" placeholder="Projeto" name="projeto" required value="{{ equipamento['projeto'] or '' }}">
+                <input type="text" placeholder="Usuário Responsável" name="usuario" value="{{ equipamento['usuario'] or '' }}">
+                <input type="text" placeholder="OLT Hostname" name="olt_hostname" value="{{ equipamento['olt_hostname'] or '' }}">
+                <input type="text" placeholder="OLT IP" name="olt_ip" value="{{ equipamento['olt_ip'] or '' }}">
+                <input type="number" placeholder="Slot" name="slot" class="numeric-only" value="{{ equipamento['slot'] or '' }}">
+                <input type="number" placeholder="Porta" name="porta" class="numeric-only" value="{{ equipamento['porta'] or '' }}">
+                <input type="number" placeholder="ONT ID" name="ont_id" class="numeric-only" value="{{ equipamento['ont_id'] or '' }}">
+                <input type="text" placeholder="Serial GPON" name="serial_gpon" required value="{{ equipamento['serial_gpon'] or '' }}">
+                
+                <select name="tipo_cliente" required>
+                    <option value="" {% if not equipamento['tipo_cliente'] %}selected{% endif %}>Tipo de Cliente</option>
+                    <option value="B2C" {% if equipamento['tipo_cliente'] == 'B2C' %}selected{% endif %}>B2C</option>
+                    <option value="B2B" {% if equipamento['tipo_cliente'] == 'B2B' %}selected{% endif %}>B2B</option>
+                </select>
+
+                <select name="tipo_servico" required>
+                    <option value="" {% if not equipamento['tipo_servico'] %}selected{% endif %}>Tipo de Serviço</option>
+                    <option value="Internet" {% if equipamento['tipo_servico'] == 'Internet' %}selected{% endif %}>Internet</option>
+                    <option value="VOIP" {% if equipamento['tipo_servico'] == 'VOIP' %}selected{% endif %}>VOIP</option>
+                    <option value="VOD" {% if equipamento['tipo_servico'] == 'VOD' %}selected{% endif %}>VOD</option>
+                    <option value="VPN" {% if equipamento['tipo_servico'] == 'VPN' %}selected{% endif %}>VPN</option>
+                </select>
+
+                <input type="number" placeholder="SVLAN" name="svlan" class="numeric-only" value="{{ equipamento['svlan'] or '' }}">
                 <input type="number" placeholder="CVLAN" name="cvlan" class="numeric-only" value="{{ equipamento['cvlan'] or '' }}">
-                <input type="number" placeholder="VLAN REDE" name="vlan_rede" class="numeric-only" value="{{ equipamento['vlan_rede'] or '' }}">
-                <input type="number" placeholder="VLAN VOIP" name="vlan_voip" class="numeric-only" value="{{ equipamento['vlan_voip'] or '' }}">
-                <input type="number" placeholder="VLAN VIDEO" name="vlan_video" class="numeric-only" value="{{ equipamento['vlan_video'] or '' }}">
                 
                 <select name="status">
                     <option value="Disponível" {% if equipamento['status'] == 'Disponível' %}selected{% endif %}>Disponível</option>
                     <option value="Em Uso" {% if equipamento['status'] == 'Em Uso' %}selected{% endif %}>Em Uso</option>
                     <option value="Em Manutenção" {% if equipamento['status'] == 'Em Manutenção' %}selected{% endif %}>Em Manutenção</option>
                 </select>
-    
-                <input type="text" placeholder="OBSERVAÇÃO" name="observacao" class="input-full-width" value="{{ equipamento['observacao'] or '' }}">
+
+                <input type="text" placeholder="Observação" name="observacao" class="input-full-width" value="{{ equipamento['observacao'] or '' }}">
                 <button type="submit">Salvar Alterações</button>
             </form>
         </div>

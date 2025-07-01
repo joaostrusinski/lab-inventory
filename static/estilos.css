@@ -95,7 +95,7 @@ button {
     font-weight: bold;
 }
 
-/* REGRA CORRIGIDA: Aplica-se apenas aos botões de submissão principais */
+/* Regra para os botões principais de formulário (Cadastrar/Salvar) */
 .form-container button[type="submit"] {
     background-color: #28a745;
     color: white;
@@ -117,7 +117,7 @@ button {
     background-color: #0069d9;
 }
 
-/* REGRA DO BOTÃO EDITAR CORRIGIDA */
+/* Regra do botão Editar */
 .btn-editar {
     display: inline-block;
     background-color: #6c757d;
@@ -127,20 +127,20 @@ button {
     padding: 8px 12px;
     border-radius: 4px;
     font-size: 1rem;
-    font-weight: bold; /* Garantindo o negrito */
+    font-weight: bold;
 }
 
 .btn-editar:hover {
     background-color: #5a6268;
 }
 
-/* REGRA DO BOTÃO APAGAR CORRIGIDA */
-.btn-apagar {
+/* Regra do botão Apagar (mais específica) */
+.form-apagar button.btn-apagar {
     background-color: #dc3545; /* Vermelho */
     color: white;
 }
 
-.btn-apagar:hover {
+.form-apagar button.btn-apagar:hover {
     background-color: #c82333;
 }
 
@@ -171,4 +171,12 @@ button {
 }
 .status-em-manutencao {
     background-color: #f8d7da !important;
+}
+
+/* Deixa o texto do select cinza quando a opção padrão (vazia) está selecionada */
+select:required:invalid {
+    color: #6c757d;
+}
+option {
+    color: #333;
 }

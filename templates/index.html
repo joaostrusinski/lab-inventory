@@ -21,43 +21,65 @@
         {% endwith %}
 
         <div class="controles">
-            <input type="text" id="filtro" placeholder="Filtrar por OLT, GPON, etc...">
+            <input type="text" id="filtro" placeholder="Filtrar por Projeto, Usuário, OLT, etc...">
         </div>
         
         <div class="form-container">
             <h2>Cadastrar Novo Equipamento</h2>
             <form class="form-cadastro" action="{{ url_for('create') }}" method="post">
-                <input type="text" placeholder="OLT" name="olt" required>
-                <input type="text" placeholder="GPON" name="gpon" required>
-                <input type="number" placeholder="SLOT" name="slot" class="numeric-only">
-                <input type="number" placeholder="PORTA" name="porta" class="numeric-only">
-                <input type="number" placeholder="ID" name="id_onu" class="numeric-only">
+                <input type="text" placeholder="Projeto" name="projeto" required>
+                <input type="text" placeholder="Solicitante" name="usuario">
+                <input type="text" placeholder="OLT Hostname" name="olt_hostname">
+                <input type="text" placeholder="OLT IP" name="olt_ip">
+                <input type="number" placeholder="Slot" name="slot" class="numeric-only">
+                <input type="number" placeholder="Porta" name="porta" class="numeric-only">
+                <input type="number" placeholder="ONT ID" name="ont_id" class="numeric-only">
+                <input type="text" placeholder="Serial GPON" name="serial_gpon" required>
+                
+                <select name="tipo_cliente" required>
+                    <option value="" selected>Tipo de Cliente</option>
+                    <option value="B2C">B2C</option>
+                    <option value="B2B">B2B</option>
+                </select>
+
+                <select name="tipo_servico" required>
+                    <option value="" selected>Tipo de Serviço</option>
+                    <option value="Internet">Internet</option>
+                    <option value="VOIP">VOIP</option>
+                    <option value="VOD">VOD</option>
+                    <option value="VPN">VPN</option>
+                </select>
+
+                <input type="number" placeholder="SVLAN" name="svlan" class="numeric-only">
                 <input type="number" placeholder="CVLAN" name="cvlan" class="numeric-only">
-                <input type="number" placeholder="VLAN REDE" name="vlan_rede" class="numeric-only">
-                <input type="number" placeholder="VLAN VOIP" name="vlan_voip" class="numeric-only">
-                <input type="number" placeholder="VLAN VIDEO" name="vlan_video" class="numeric-only">
+                
                 <select name="status">
                     <option value="Disponível">Disponível</option>
                     <option value="Em Uso">Em Uso</option>
                     <option value="Em Manutenção">Em Manutenção</option>
                 </select>
-                <input type="text" placeholder="OBSERVAÇÃO" name="observacao" class="input-full-width">
+
+                <input type="text" placeholder="Observação" name="observacao" class="input-full-width">
                 <button type="submit">Cadastrar Equipamento</button>
             </form>
         </div>
 
+        <!-- Tabela completa restaurada -->
         <table>
             <thead>
                 <tr>
-                    <th>OLT</th>
-                    <th>GPON</th>
+                    <th>PROJETO</th>
+                    <th>USUÁRIO</th>
+                    <th>OLT HOSTNAME</th>
+                    <th>OLT IP</th>
                     <th>SLOT</th>
                     <th>PORTA</th>
-                    <th>ID</th>
+                    <th>ONT ID</th>
+                    <th>SERIAL GPON</th>
+                    <th>TIPO CLIENTE</th>
+                    <th>TIPO SERVIÇO</th>
+                    <th>SVLAN</th>
                     <th>CVLAN</th>
-                    <th>VLAN REDE</th>
-                    <th>VLAN VOIP</th>
-                    <th>VLAN VIDEO</th>
                     <th>STATUS</th>
                     <th>OBSERVAÇÃO</th>
                     <th>DATA CADASTRO</th>
@@ -67,15 +89,18 @@
             <tbody>
                 {% for equipamento in equipamentos %}
                 <tr class="{% if equipamento['status'] == 'Disponível' %}status-disponivel{% elif equipamento['status'] == 'Em Uso' %}status-em-uso{% elif equipamento['status'] == 'Em Manutenção' %}status-em-manutencao{% endif %}">
-                    <td>{{ equipamento['olt'] }}</td>
-                    <td>{{ equipamento['gpon'] }}</td>
+                    <td>{{ equipamento['projeto'] or '' }}</td>
+                    <td>{{ equipamento['usuario'] or '' }}</td>
+                    <td>{{ equipamento['olt_hostname'] or '' }}</td>
+                    <td>{{ equipamento['olt_ip'] or '' }}</td>
                     <td>{{ equipamento['slot'] or '' }}</td>
                     <td>{{ equipamento['porta'] or '' }}</td>
-                    <td>{{ equipamento['id_onu'] or '' }}</td>
+                    <td>{{ equipamento['ont_id'] or '' }}</td>
+                    <td>{{ equipamento['serial_gpon'] or '' }}</td>
+                    <td>{{ equipamento['tipo_cliente'] or '' }}</td>
+                    <td>{{ equipamento['tipo_servico'] or '' }}</td>
+                    <td>{{ equipamento['svlan'] or '' }}</td>
                     <td>{{ equipamento['cvlan'] or '' }}</td>
-                    <td>{{ equipamento['vlan_rede'] or '' }}</td>
-                    <td>{{ equipamento['vlan_voip'] or '' }}</td>
-                    <td>{{ equipamento['vlan_video'] or '' }}</td>
                     <td>{{ equipamento['status'] }}</td>
                     <td>{{ equipamento['observacao'] or '' }}</td>
                     <td>{{ equipamento['data_criacao'] | datetimeformat }}</td>
